@@ -48,4 +48,5 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-server.listen(2311);
+var port = Number(process.env.PORT || 2311);
+server.listen(port);
