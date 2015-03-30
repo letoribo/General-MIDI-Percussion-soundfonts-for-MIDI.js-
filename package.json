@@ -17,8 +17,7 @@
   ],
   "dependencies": {
     "express": "3.x",
-    "socket.io": "0.9.x",
-    "jazz-midi": "^1.4.1"
+    "socket.io": "0.9.x"
   },
   "scripts": {
     "start": "node app.js"
