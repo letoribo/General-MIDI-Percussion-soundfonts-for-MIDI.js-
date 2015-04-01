@@ -25,11 +25,7 @@ myModule.factory('socket', function($rootScope) {
 });
 
 function myController($scope, $timeout, socket) {
-  // Incoming
-  /*socket.on('list', function(data){
-    $scope.list = data;
-  })*/ 
- 
+  // Incoming 
   socket.on('onNoteCreated', function(data) { console.log(data);
 	 if (data.set === 'L') {
 	  	$scope.side = data.set;
@@ -128,7 +124,6 @@ function myController($scope, $timeout, socket) {
   };
   
   angular.element(document).ready(function() {console.log(MIDI);
-  //window.onload = function (){ console.log(MIDI);
     MIDI.loader = new widgets.Loader;
 	 MIDI.loadPlugin({
 		soundfontUrl: "./soundfont/",
@@ -273,15 +268,6 @@ function myController($scope, $timeout, socket) {
   $scope.changetempo = function() {
     $scope.interval = 60000 / $scope._tempo * 0.25;
   };
-  
-  /*$scope.changePitch = function() {
-  	 socket.emit('pitch', $scope._pitch);
-  };*/
-  
-  /*$scope.changemidi = function() {
-    socket.emit('selectmidi', $scope._out);
-    $('select').blur();
-  };*/
     
   $scope.ChangeVelocity = function(event, ui) {
     $scope.velocity = ui.value;
@@ -317,7 +303,6 @@ function myController($scope, $timeout, socket) {
   
   $scope.metronome = function (){
   	 var data = $scope.count ? 0 : 34;
-    //socket.emit('time', data);
     MIDI.noteOn(0, data, $scope.velocity);
   };
 
@@ -360,7 +345,6 @@ function myController($scope, $timeout, socket) {
   $scope.beats = 8;
   $scope._tempo = 125;
   $scope.velocity = 63;
-  //$scope._pitch = 64;
   $scope.Lpattern = "01001011";
   $scope.Rpattern = "10110100";
   $scope.set = [];
