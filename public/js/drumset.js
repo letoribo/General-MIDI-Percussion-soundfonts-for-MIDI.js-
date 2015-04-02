@@ -294,13 +294,21 @@ function myController($scope, $timeout, socket) {
     MIDI.noteOn(0, r, $scope.velocity);*/
     /*if ($scope.updown() == 1) MIDI.noteOn(0, $scope.note, $scope.velocity);
     if ($scope.Updown() == 1) MIDI.noteOn(0, $scope.Note, $scope.velocity);*/
-    $scope.updown() ? MIDI.noteOn(0, $scope.note, $scope.velocity) : MIDI.noteOff(0, $scope.note);
-    $scope.Updown() ? MIDI.noteOn(0, $scope.Note, $scope.velocity) : MIDI.noteOff(0, $scope.Note);
+    $scope.updown() ? $scope.noteOn($scope.note) : $scope.noteOff($scope.note);
+    $scope.Updown() ? $scope.noteOn($scope.Note) : $scope.noteOff($scope.Note);
     timeout = $timeout(function() {
       tick();
     }, $scope.interval);
   }
   
+  $scope.noteOn = function (note){
+  	 MIDI.noteOn(0, note, $scope.velocity)
+  };
+
+  $scope.noteOff = function (note){
+  	 MIDI.noteOff(0, note);
+  };
+
   $scope.metronome = function (){
   	 var data = $scope.count ? 0 : 34;
     MIDI.noteOn(0, data, $scope.velocity);
