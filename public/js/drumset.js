@@ -40,7 +40,7 @@ function myController($scope, $timeout, socket) {
   });
 	
   socket.on('onPatternChanged', function(data) { console.log(data);
-	 if (data.invert == true) {
+	 if (data.invert === true) {
 	   if (data.side === 'L') { $scope.Rp = data.p;
 	  	  $scope.Folder = 'L'; $scope.Rpattern = data.id; $scope.Invert = true;
 	  	}else { $scope.Lp = data.p;
@@ -62,16 +62,16 @@ function myController($scope, $timeout, socket) {
   });
   
   socket.on('onNoteDeleted', function(data) {
-      console.log(data);
+    console.log(data);
     if (data.set === "L") {
       if(_.size($scope.set) > 1){
 	     $scope.set.splice(data.id, 1);
 	     if(_.size($scope.set) == 1){
 	       $scope.sound = $scope.mas[$scope.set[0]];
 	       $scope.note = $scope.set[0];
-	     };  
+	     }  
 	     console.log($scope.set + ';' + _.size($scope.set));
-	   };
+	   }
 	 }
 	 if (data.set === "R") {
 	   if(_.size($scope.Set) > 1){
@@ -79,10 +79,10 @@ function myController($scope, $timeout, socket) {
 	     if(_.size($scope.Set) == 1){
 	       $scope.Sound = $scope.mas[$scope.Set[0]];
 	       $scope.Note = $scope.Set[0];
-	     }; 
+	     }
 	     console.log($scope.Set + ';' + _.size($scope.Set));
-	   };
-	 };  
+	   }
+	 }  
   });	
       
   // Outgoing
@@ -155,7 +155,7 @@ function myController($scope, $timeout, socket) {
       $scope.Note = note;
       $scope.Sound = $scope.mas[note];
     }
-  }
+  };
    
   $scope.onStop = function(event, ui) {
     $scope.beats = ui.value;
@@ -170,9 +170,9 @@ function myController($scope, $timeout, socket) {
 	     if(_.size($scope.set) == 1){
 	       $scope.sound = $scope.mas[$scope.set[0]];
 	       $scope.note = $scope.set[0];
-	     };  
+	     }  
 	     console.log($scope.set + ';' + _.size($scope.set)); $scope.deleteNote(set, index);
-	   };
+	   }
 	 }
 	 if (set === "R") {
 	   if(_.size($scope.Set) > 1){
@@ -180,10 +180,10 @@ function myController($scope, $timeout, socket) {
 	     if(_.size($scope.Set) == 1){
 	       $scope.Sound = $scope.mas[$scope.Set[0]];
 	       $scope.Note = $scope.Set[0];
-	     }; 
+	     } 
 	     console.log($scope.Set + ';' + _.size($scope.Set)); $scope.deleteNote(set, index);
-	   };
-	 };
+	   }
+	 }
   };
   
   $scope.addToSet = function(set, index) {
@@ -194,7 +194,7 @@ function myController($scope, $timeout, socket) {
         console.log($scope.set + ';' + _.size($scope.set));
         
         $scope.createNote(set, note);      
-      };
+      }
     }
     if (set === 'R') { 
       var note = index + 26;
@@ -203,8 +203,8 @@ function myController($scope, $timeout, socket) {
         console.log($scope.Set + ';' + _.size($scope.Set));
               
         $scope.createNote(set, note);      
-      };
-    };
+      }
+    }
   };
   
   $scope.play = function() {
@@ -236,18 +236,18 @@ function myController($scope, $timeout, socket) {
       $scope.Snd = $scope.Updown();
     }
     else{
-      if(Number($scope.Rpattern[blast]) == 0 && Number($scope.Rpattern[last]) == 1){
+      if(Number($scope.Rpattern[blast]) === 0 && Number($scope.Rpattern[last]) == 1){
         $scope.Visual();
       }
-    };
+    }
     if(_.size($scope.set) == 1){	
     	$scope.snd = $scope.updown();
     }
     else{
-     	if(Number($scope.Lpattern[blast]) == 0 && Number($scope.Lpattern[last]) == 1){
+     	if(Number($scope.Lpattern[blast]) === 0 && Number($scope.Lpattern[last]) == 1){
      	  $scope.visual();
       }
-    };     
+    }     
     $scope.Timeout = $timeout(function() {
       $scope.randomize();
     }, $scope.interval);            
@@ -294,15 +294,15 @@ function myController($scope, $timeout, socket) {
     MIDI.noteOn(0, r, $scope.velocity);*/
     /*if ($scope.updown() == 1) MIDI.noteOn(0, $scope.note, $scope.velocity);
     if ($scope.Updown() == 1) MIDI.noteOn(0, $scope.Note, $scope.velocity);*/
-    $scope.updown() ? $scope.noteOn($scope.note) : $scope.noteOff($scope.note);
-    $scope.Updown() ? $scope.noteOn($scope.Note) : $scope.noteOff($scope.Note);
+    var left = $scope.updown() ? $scope.noteOn($scope.note) : $scope.noteOff($scope.note);
+    var right = $scope.Updown() ? $scope.noteOn($scope.Note) : $scope.noteOff($scope.Note);
     timeout = $timeout(function() {
       tick();
     }, $scope.interval);
-  }
+  };
   
   $scope.noteOn = function (note){
-  	 MIDI.noteOn(0, note, $scope.velocity)
+  	 MIDI.noteOn(0, note, $scope.velocity);
   };
 
   $scope.noteOff = function (note){
@@ -323,7 +323,7 @@ function myController($scope, $timeout, socket) {
     64 : "Low Conga", 65 : "High Timbale", 66 : "Low Timbale", 67 : "High Agogo", 68 : "Low Agogo", 69 : "Cabasa", 70 : "Maracas", 71 : "Short Whistle",
     72 : "Long Whistle", 73 : "Short Guiro", 74 : "Long Guiro", 75 : "Claves", 76 : "Hi Wood Block", 77 : "Low Wood Block", 78 : "Mute Cuica", 79 : "Open Cuica",
     80 : "Mute Triangle", 81 : "Open Triangle", 82 : "Shaker", 83 : "Jingle Bell", 84 : "Bell Tree", 85 : "Castanets", 86 : "Mute Surdo", 87 : "Open Surdo"
-  }
+  };
  
   $scope.R1 = [{p: "10101010", bg: "tomato"}, {p: "10100110", bg: "#66FFFF"}, {p: "10011010", bg: "#66FFFF"}, {p: "10110110", bg: "#66CCFF"}, {p: "10010010", bg: "#FFCCFF"}, {p: "10010110", bg: "#CCFF99"}, {p: "10110010", bg: "#FFFF99"}];
   $scope.R2 = [{p: "10101100", bg: "#FFFF99"}, {p: "10100100", bg: "#FFCCFF"}, {p: "10110100", bg: "#CCFF99"}, {p: "10010100", bg: "#FFCCFF"}];
@@ -395,5 +395,5 @@ function myController($scope, $timeout, socket) {
   	 var r = $scope.R[_.random(33)]; $scope.changeRpattern(r);
   };
   	
-  $scope.blur = function() { $("input").blur(); }
-};
+  $scope.blur = function() { $("input").blur(); };
+}

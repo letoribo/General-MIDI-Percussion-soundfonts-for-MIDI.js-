@@ -19,6 +19,11 @@
     "express": "3.x",
     "socket.io": "0.9.x"
   },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.1",
+    "grunt-contrib-watch": "^0.6.1"
+  },
   "scripts": {
     "start": "node app.js"
   },
